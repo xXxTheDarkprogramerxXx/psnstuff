@@ -10,53 +10,48 @@ namespace Download_Helper
     {
         static void Main(string[] args)
         {
-            string fileName = args[0];
-            string sourcePath = args[1];
-            string targetPath = args[2];
 
-            // Use Path class to manipulate file and directory paths.
-            string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
-            string destFile = System.IO.Path.Combine(targetPath, fileName);
+            string mainstr = @"
+            *********************************************************
+            *           PSNStuff Download Helper                    *
+            *********************************************************
+             ";
 
-            // To copy a folder's contents to a new location:
-            // Create a new target folder, if necessary.
-            if (!System.IO.Directory.Exists(targetPath))
+            if (args.Length == 0)
             {
-                System.IO.Directory.CreateDirectory(targetPath);
-            }
-
-            // To copy a file to another location and 
-            // overwrite the destination file if it already exists.
-            System.IO.File.Copy(sourceFile, destFile, true);
-
-            // To copy all the files in one directory to another directory.
-            // Get the files in the source folder. (To recursively iterate through
-            // all subfolders under the current directory, see
-            // "How to: Iterate Through a Directory Tree.")
-            // Note: Check for target path was performed previously
-            //       in this code example.
-            if (System.IO.Directory.Exists(sourcePath))
-            {
-                string[] files = System.IO.Directory.GetFiles(sourcePath);
-
-                // Copy the files and overwrite destination files if they already exist.
-                foreach (string s in files)
-                {
-                    // Use static Path methods to extract only the file name from the path.
-                    fileName = System.IO.Path.GetFileName(s);
-                    destFile = System.IO.Path.Combine(targetPath, fileName);
-                    System.IO.File.Copy(s, destFile, true);
-                }
+                Console.WriteLine(mainstr);
+                 Console.WriteLine("Arguments where incorectly passed \n\nPress any key to exit.");
+                 Console.ReadKey();
             }
             else
             {
-                Console.WriteLine("Source path does not exist!");
-            }
+                Console.WriteLine(mainstr);
+               
+                //copy the data
+                string fileName = args[0];
+                string sourcePath = args[1];
+                string targetPath = args[2];
 
-            // Keep console window open in debug mode.
-            //Console.WriteLine("Press any key to exit.");
-           // Console.ReadKey();
-           System.Diagnostics.Process.Start("psnstuff.exe");
+                Console.WriteLine("Replacing '{0}'\n\nsourcepath: '{1}'\n\ntargetpath: '{2}'",fileName,sourcePath,targetPath);
+
+                // Use Path class to manipulate file and directory paths.
+                string sourceFile = sourcePath;
+                string destFile = targetPath;
+
+                // To copy a file to another location and 
+                // overwrite the destination file if it already exists.
+                System.IO.File.Copy(sourceFile, destFile, true);
+
+                Console.WriteLine("Done... starting new version of psnstuff");
+
+                // Keep console window open in debug mode.
+                //Console.WriteLine("Press any key to exit.");
+                // Console.ReadKey();
+                if (System.IO.File.Exists("psnstuff.exe"))
+                {
+                    System.Diagnostics.Process.Start("psnstuff.exe");
+                }
+            }
         }
     }
 

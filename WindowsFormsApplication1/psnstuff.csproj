@@ -137,9 +137,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Download Helper.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="tool.ico" />
     <None Include="Resources\pkgID.png" />
     <None Include="Resources\rotesX.png" />
@@ -150,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Download Helper\Download Helper.csproj">
+      <Project>{f13aa45c-78b8-4de0-ac1a-7ebd55273633}</Project>
+      <Name>Download Helper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
